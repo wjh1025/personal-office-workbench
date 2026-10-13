@@ -166,7 +166,7 @@ button{cursor:pointer;border:none;background:none;padding:0}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px}
 .cal-d{
   position:relative;height:18px;border-radius:5px;background:transparent;border:0;
-  display:flex;flex-direction:row;align-items:center;justify-content:center;gap:2.5px;
+  display:flex;flex-direction:row;align-items:center;justify-content:center;gap:2px;
   font-family:inherit;font-size:11.5px;color:var(--text);cursor:pointer;padding:0 1px;
   transition:background .15s,color .15s;
 }
@@ -179,11 +179,11 @@ button{cursor:pointer;border:none;background:none;padding:0}
 .cal-d.today.sel{box-shadow:inset 0 0 0 2px var(--accent-deep),0 1px 3px rgba(13,148,136,.3)}
 .cal-d.hasod{color:var(--danger);font-weight:700}
 .cal-d.hasod.today{color:#fff}
-.cal-dots{display:inline-flex;gap:2px;align-items:center;justify-content:center;flex:0 0 auto}
+.cal-dots{display:inline-flex;flex-direction:column;gap:1.5px;align-items:center;justify-content:center;flex:0 0 auto}
 .cal-dots i{width:3.5px;height:3.5px;border-radius:50%;display:block;flex:0 0 3.5px}
 .cal-d.today .cal-dots i{box-shadow:0 0 0 .5px rgba(255,255,255,.55)}
-.cal-dots .more{font-size:8.5px;line-height:1;color:var(--text-3);font-style:normal;margin-left:1px;flex:0 0 auto}
-.cal-d.today .cal-dots .more{color:rgba(255,255,255,.85)}
+.cal-dots .more{width:3.5px;height:3.5px;border-radius:50%;display:block;flex:0 0 3.5px;background:currentColor;opacity:.42}
+.cal-d.today .cal-dots .more{background:#fff;opacity:.6}
 /* 图例收进标题行右侧、悬停展开，省下约 22px 纵向空间 */
 .cal-lg{
   position:absolute;right:12px;top:11px;display:flex;align-items:center;gap:5px;
@@ -556,8 +556,9 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
   .hero{min-height:0;height:auto;margin-bottom:16px;gap:12px}
   .hero-c{padding:20px 16px;max-width:100%;width:100%;min-width:0}
   .cal{width:100%;padding:12px 12px 11px}
-  .cal-d{height:32px;font-size:13.5px;gap:4px}
-  .cal-dots i{width:4px;height:4px;flex:0 0 4px}
+  .cal-d{height:34px;font-size:13.5px;gap:4px}
+  .cal-dots{gap:2px}
+  .cal-dots i,.cal-dots .more{width:4px;height:4px;flex:0 0 4px}
   .cal-lg{position:static;opacity:1;pointer-events:auto;margin-top:8px;
     padding:5px 8px;justify-content:center;gap:9px;flex-wrap:wrap}
   .cal-lg span{font-size:10.5px}
@@ -1601,8 +1602,8 @@ function calendar() {
     if (!c.out && dots && dots[0] === CAL_DOT.od) cls.push('hasod');
     const dnum = c.d.getDate();
     const dotHtml = dots
-      ? `<span class="cal-dots">${dots.slice(0, maxDot).map(d => `<i style="background:${d}"></i>`).join('')}${dots.length > maxDot ? '<i class="more">+</i>' : ''}</span>`
-      : '<span class="cal-dots"></span>';
+      ? `<span class="cal-dots">${dots.slice(0, maxDot).map(d => `<i style="background:${d}"></i>`).join('')}${dots.length > maxDot ? '<i class="more"></i>' : ''}</span>`
+      : '';
     const label = `${m + 1}月${dnum}日` + (dots ? `，${dots.length} 项安排` : '，无安排');
     return `<button class="${cls.join(' ')}" data-act="cal-pick" data-s="${c.s}" data-m="${m}" title="${label}" aria-label="${label}"><span class="cal-n">${dnum}</span>${dotHtml}</button>`;
   }).join('');
