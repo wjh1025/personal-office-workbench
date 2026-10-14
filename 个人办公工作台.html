@@ -1113,6 +1113,7 @@ const I = (() => {
     alert: w('<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>'),
     sun: w('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
     fwd: w('<path d="M13 17l5-5-5-5M6 17l5-5-5-5"/>'),
+    back: w('<path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/>'),
     trash: w('<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>'),
     edit: w('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'),
     down: w('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/>'),
@@ -1612,7 +1613,7 @@ function calendar() {
     <div class="cal-h">
       <span class="cal-t">${y} 年 ${mk} 月</span>
       <span class="cal-nav">
-        <button data-act="cal-prev" title="上一月" aria-label="上一月">${I.fwd.replace('transform:','scaleX(-1);transform:')}</button>
+        <button data-act="cal-prev" title="上一月" aria-label="上一月">${I.back}</button>
         <button data-act="cal-next" title="下一月" aria-label="下一月">${I.fwd}</button>
       </span>
     </div>
