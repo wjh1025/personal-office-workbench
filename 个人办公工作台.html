@@ -2066,7 +2066,7 @@ function vBackup() {
 /* ================= 内部通讯录 ================= */
 /* 数据来自同目录 通讯录.json —— 该文件**不上传 GitHub**，HTML 本身不含通讯录内容。
    file:// 下 fetch 本地 JSON 会被 CORS 拦，所以先试 fetch，失败再退回 File System Access。 */
-const LEAK_TEST="刘臣 691380";const CONTACTS_FILE = '通讯录.json';
+const CONTACTS_FILE = '通讯录.json';
 const SITE_URL = 'http://22.47.160.16:8788';
 let CT = null;              // { people, special, ... }
 let ctLoadState = 'idle';   // idle | loading | ok | missing | error
