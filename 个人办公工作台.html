@@ -132,6 +132,9 @@ button{cursor:pointer;border:none;background:none;padding:0}
   box-shadow:var(--sh-2);border:1px solid var(--line);background:#f7faf9;
   min-height:186px;height:186px;display:flex;align-items:center;gap:24px;
 }
+/* hero 只在「今日焦点」页有内容；其余页 innerHTML 为空，
+   而上面锁死了 186px 高度与边框，会露出一个空白灰框 —— 必须整体隐藏 */
+.hero:empty{display:none}
 .hero-img{position:absolute;inset:0;background-size:cover;background-position:center 62%;opacity:.96}
 .hero-ov{position:absolute;inset:0;background:
   linear-gradient(100deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.93) 34%,rgba(255,255,255,.6) 56%,rgba(255,255,255,.12) 78%,rgba(255,255,255,0) 100%),
@@ -1366,7 +1369,7 @@ const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 
 
 /* ---------- 状态 ---------- */
 let S = null;
-let ui = { view: 'focus', taskFilter: 'today', projFilter: '', tagFilter: '', noteQ: '', dirQ: '', weekOff: 0, nudgeHidden: false, calMonth: new Date().getMonth(), calPick: '' };
+let ui = { view: 'week', taskFilter: 'today', projFilter: '', tagFilter: '', noteQ: '', dirQ: '', weekOff: 0, nudgeHidden: false, calMonth: new Date().getMonth(), calPick: '' };
 
 const blank = () => ({
   v: 1,
@@ -1624,12 +1627,12 @@ const groupByDue = arr => {
 
 /* ---------- 渲染入口 ---------- */
 const NAV = [
+  { k: 'week',   n: T('navWeek'),   i: 'grid7' },
   { k: 'focus',  n: T('navFocus'), i: 'focus' },
   { k: 'tasks',  n: T('navTasks'), i: 'task'  },
   { k: 'notes',  n: T('navNotes'), i: 'bulb'  },
   { k: 'projects', n: T('navProjects'), i: 'proj' },
   { k: 'review', n: T('navReview'), i: 'chart' },
-  { k: 'week',   n: T('navWeek'),   i: 'grid7' },
   { k: 'backup', n: T('navBackup'), i: 'db'    },
   { k: 'dir',    n: T('navDir'),    i: 'dir'   }
 ];
